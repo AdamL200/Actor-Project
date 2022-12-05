@@ -14,11 +14,12 @@ public class ActorApplication {
 	@Autowired
 	private ActorRepository actorRepo;
 	private FilmRepository filmRepo;
+	private CityRepository cityRepo;
 
-	public ActorApplication(ActorRepository ar, FilmRepository fr){
+	public ActorApplication(ActorRepository ar, FilmRepository fr, CityRepository cr){
 		actorRepo = ar;
 		filmRepo = fr;
-		System.out.println("works");
+		cityRepo = cr;
 	}
 	public static void main(String[] args) {
 		SpringApplication.run(ActorApplication.class, args);
@@ -26,6 +27,10 @@ public class ActorApplication {
 	@GetMapping("/actors")
 	public @ResponseBody Iterable<Actor> getAllActors(){
 		return actorRepo.findAll();
+	}
+	@GetMapping("/cities")
+	public @ResponseBody Iterable<City> getAllCities(){
+		return cityRepo.findAll();
 	}
 	@GetMapping("/actors/j")
 	public @ResponseBody Iterable<Actor> getActorsJ(){
@@ -47,9 +52,19 @@ public class ActorApplication {
 		return filmRepo.findById(id)
 				.orElseThrow(() -> new ResourceAccessException("Resource films/" + id + "could not be found"));
 	}
+	@GetMapping("/cities/{id}")
+	public City getCity(@PathVariable int id) {
+
+		return cityRepo.findById(id)
+				.orElseThrow(() -> new ResourceAccessException("Resource cities/" + id + "could not be found"));
+	}
 	@PostMapping("/actors")
 	Actor newActor(@RequestBody Actor newActor) {
 		return actorRepo.save(newActor);
+	}
+	@PostMapping("/cities")
+	City newCity(@RequestBody City newCity) {
+		return cityRepo.save(newCity);
 	}
 	@PostMapping("/films")
 	Film newFilm(@RequestBody Film newFilm) {
@@ -88,6 +103,20 @@ public class ActorApplication {
 					return filmRepo.save(newFilm);
 				});
 	}
+	@PutMapping("/cities/{id}")
+	City replaceCity(@RequestBody City newCity, @PathVariable int id) {
+
+		return cityRepo.findById(id)
+				.map(city -> {
+					city.setCity(newCity.getCity());
+					city.setCountryid(newCity.getCountryid());
+					return cityRepo.save(city);
+				})
+				.orElseGet(() -> {
+					newCity.setCityid(id);
+					return cityRepo.save(newCity);
+				});
+	}
 	@DeleteMapping("/actors/{id}")
 	void deleteActor(@PathVariable int id) {
 		actorRepo.deleteById(id);
@@ -95,5 +124,9 @@ public class ActorApplication {
 	@DeleteMapping("/films/{id}")
 	void deleteFilm(@PathVariable int id) {
 		filmRepo.deleteById(id);
+	}
+	@DeleteMapping("/cities/{id}")
+	void deleteCity(@PathVariable int id) {
+		cityRepo.deleteById(id);
 	}
 }
