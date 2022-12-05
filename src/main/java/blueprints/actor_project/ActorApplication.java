@@ -16,6 +16,7 @@ public class ActorApplication {
 	private FilmRepository filmRepo;
 	private CityRepository cityRepo;
 
+
 	public ActorApplication(ActorRepository ar, FilmRepository fr, CityRepository cr){
 		actorRepo = ar;
 		filmRepo = fr;
@@ -36,6 +37,7 @@ public class ActorApplication {
 	public @ResponseBody Iterable<Actor> getActorsJ(){
 		return actorRepo.findActorsJ();
 	}
+
 	@GetMapping("/films")
 	public @ResponseBody Iterable<Film> getAllFilms(){
 		return filmRepo.findAll();
@@ -57,6 +59,13 @@ public class ActorApplication {
 
 		return cityRepo.findById(id)
 				.orElseThrow(() -> new ResourceAccessException("Resource cities/" + id + "could not be found"));
+	}
+	@GetMapping("/get_actors/{id}")
+	public Iterable<Actor> getActors(@PathVariable int id) {
+
+		Film film1 = filmRepo.findById(id)
+				.orElseThrow(() -> new ResourceAccessException("Resource films/" + id + "could not be found"));
+		return film1.getActors();
 	}
 	@PostMapping("/actors")
 	Actor newActor(@RequestBody Actor newActor) {

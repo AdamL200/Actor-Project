@@ -2,6 +2,8 @@ package blueprints.actor_project;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name="film")
 public class Film {
@@ -10,12 +12,22 @@ public class Film {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     int filmid;
 
+    @ManyToMany
+    @JoinTable(
+            name="film_actor",
+            joinColumns=@JoinColumn(name="film_id", referencedColumnName="film_id"),
+            inverseJoinColumns=@JoinColumn(name="actor_id", referencedColumnName="actor_id"))
+    private List<Actor> actors;
     @Column(name="title")
     String title;
     @Column(name="description")
     String desc;
     @Column(name="language_id")
     int lang_id;
+
+    public List<Actor> getActors() {
+        return actors;
+    }
 
     @Column(name="release_year")
     int year;
