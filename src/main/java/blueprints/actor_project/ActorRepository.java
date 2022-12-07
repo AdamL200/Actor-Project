@@ -10,5 +10,6 @@ public interface ActorRepository extends JpaRepository<Actor,Integer> {
             nativeQuery = true)
     Iterable<Actor> findActorsJ();
 
-
+    @Query(value = "SELECT * FROM actor ORDER BY RAND() LIMIT 1", nativeQuery = true)
+    Actor getRand();
 }

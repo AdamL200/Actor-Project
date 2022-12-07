@@ -35,6 +35,10 @@ public class ActorApplication {
 	public @ResponseBody Iterable<Category> getAllCategories(){
 		return catRepo.findAll();
 	}
+	@GetMapping("/categories/category/{category}")
+	public @ResponseBody Iterable<Object> getAllFromCategory(@PathVariable String category){
+		return catRepo.findAllFromCategory(category);
+	}
 	@GetMapping("/cities")
 	public @ResponseBody Iterable<City> getAllCities(){
 		return cityRepo.findAll();
@@ -54,6 +58,11 @@ public class ActorApplication {
 		return actorRepo.findById(id)
 				.orElseThrow(() -> new ActorNotFoundException(id));
 	}
+	@GetMapping("/actors/random")
+	public Actor getActorRand() {
+
+		return actorRepo.getRand();
+	}
 
 	@GetMapping("/film_actors")
 	public Iterable<Object> getFilmActors() {
@@ -61,11 +70,24 @@ public class ActorApplication {
 		return filmRepo.findFilmActors();
 
 	}
+
+	@GetMapping("/film_categories")
+	public Iterable<Object> getFilmCategories() {
+
+		return filmRepo.findFilmCategories();
+
+	}
 	@GetMapping("/films/{id}")
 	public Film getFilm(@PathVariable int id) {
 
 		return filmRepo.findById(id)
 				.orElseThrow(() -> new ResourceAccessException("Resource films/" + id + "could not be found"));
+	}
+
+	@GetMapping("/films/description/{term}")
+	public Iterable<Film> getFilmsByDescription(@PathVariable String term) {
+
+		return filmRepo.findByDescription(term);
 	}
 
 	@GetMapping("/categories/{id}")
