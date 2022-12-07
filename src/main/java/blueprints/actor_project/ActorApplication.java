@@ -15,12 +15,14 @@ public class ActorApplication {
 	private ActorRepository actorRepo;
 	private FilmRepository filmRepo;
 	private CityRepository cityRepo;
+	private CategoryRepo catRepo;
 
 
-	public ActorApplication(ActorRepository ar, FilmRepository fr, CityRepository cr){
+	public ActorApplication(ActorRepository ar, FilmRepository fr, CityRepository cr,CategoryRepo catr){
 		actorRepo = ar;
 		filmRepo = fr;
 		cityRepo = cr;
+		catRepo = catr;
 	}
 	public static void main(String[] args) {
 		SpringApplication.run(ActorApplication.class, args);
@@ -28,6 +30,10 @@ public class ActorApplication {
 	@GetMapping("/actors")
 	public @ResponseBody Iterable<Actor> getAllActors(){
 		return actorRepo.findAll();
+	}
+	@GetMapping("/categories")
+	public @ResponseBody Iterable<Category> getAllCategories(){
+		return catRepo.findAll();
 	}
 	@GetMapping("/cities")
 	public @ResponseBody Iterable<City> getAllCities(){
@@ -60,6 +66,13 @@ public class ActorApplication {
 
 		return filmRepo.findById(id)
 				.orElseThrow(() -> new ResourceAccessException("Resource films/" + id + "could not be found"));
+	}
+
+	@GetMapping("/categories/{id}")
+	public Category getCategory(@PathVariable int id) {
+
+		return catRepo.findById(id)
+				.orElseThrow(() -> new ResourceAccessException("Resource categories/" + id + "could not be found"));
 	}
 	@GetMapping("/cities/{id}")
 	public City getCity(@PathVariable int id) {
