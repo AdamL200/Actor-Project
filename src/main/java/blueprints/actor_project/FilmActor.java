@@ -1,4 +1,4 @@
-/*package blueprints.actor_project;
+package blueprints.actor_project;
 
 import jakarta.persistence.*;
 
@@ -7,16 +7,29 @@ import jakarta.persistence.*;
 @IdClass(FilmAssociation.class)
 public class FilmActor {
     @Id
-    private long actorId;
+    @JoinColumn(name = "film_id", referencedColumnName = "film_id")
+            @ManyToOne(fetch = FetchType.EAGER)
+    Film filmID;
     @Id
-    private long filmId;
-    //@Column(name="IS_PROJECT_LEAD")
-    //private boolean isProjectLead;
-    @ManyToOne
-    @PrimaryKeyJoinColumn(name="actor_id", referencedColumnName="actor_id")
-    private Actor actor;
+    @JoinColumn(name = "actor_id", referencedColumnName = "actor_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    Actor actorID;
 
-    @ManyToOne
-    @PrimaryKeyJoinColumn(name="film_id", referencedColumnName="film_id")
-    private Film film;
-}*/
+    public FilmActor(){}
+
+    public Film getFilmID() {
+        return filmID;
+    }
+
+    public Actor getActorID() {
+        return actorID;
+    }
+
+    public void setActorID(Actor actorID) {
+        this.actorID = actorID;
+    }
+
+    public void setFilmID(Film filmID) {
+        this.filmID = filmID;
+    }
+}

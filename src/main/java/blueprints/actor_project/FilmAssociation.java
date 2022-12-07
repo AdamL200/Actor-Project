@@ -1,4 +1,4 @@
-/*package blueprints.actor_project;
+package blueprints.actor_project;
 
 import jakarta.persistence.*;
 
@@ -7,20 +7,10 @@ import java.io.Serializable;
 
 public class FilmAssociation implements Serializable {
 
-    private long actorId;
+    Film filmID;
 
-    private long filmId;
+    Actor actorID;
 
-    public int hashCode() {
-        return (int)(actorId + filmId);
-    }
+    public FilmAssociation(){}
 
-    public boolean equals(Object object) {
-        if (object instanceof FilmAssociation) {
-            FilmAssociation otherId = (FilmAssociation) object;
-            return (otherId.actorId == this.actorId) && (otherId.filmId == this.filmId);
-        }
-        return false;
-    }
-
-}*/
+}

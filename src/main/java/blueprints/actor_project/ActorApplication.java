@@ -48,6 +48,13 @@ public class ActorApplication {
 		return actorRepo.findById(id)
 				.orElseThrow(() -> new ActorNotFoundException(id));
 	}
+
+	@GetMapping("/film_actors")
+	public Iterable<Object> getFilmActors() {
+
+		return filmRepo.findFilmActors();
+
+	}
 	@GetMapping("/films/{id}")
 	public Film getFilm(@PathVariable int id) {
 
@@ -75,7 +82,7 @@ public class ActorApplication {
 	City newCity(@RequestBody City newCity) {
 		return cityRepo.save(newCity);
 	}
-	@PostMapping("/films")
+	@PostMapping("/films/{id}")
 	Film newFilm(@RequestBody Film newFilm) {
 		return filmRepo.save(newFilm);
 	}
