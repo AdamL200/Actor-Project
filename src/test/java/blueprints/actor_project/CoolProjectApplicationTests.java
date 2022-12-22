@@ -15,7 +15,7 @@ class CoolProjectApplicationTests {
         actor1.setFirstname("Firstnametest");
         Assertions.assertEquals("Firstnametest",actor1.getFirstname(), "First name error");
         actor1.setLastname("Lastnametest");
-        Assertions.assertEquals("Lastnametest",actor1.getFirstname(), "Last name error");
+        Assertions.assertEquals("Lastnametest",actor1.getLastname(), "Last name error");
     }
 
 }
