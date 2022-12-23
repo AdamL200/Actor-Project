@@ -38,5 +38,16 @@ class CoolProjectApplicationTests {
 
     }
 
+    @Test
+    public void testCityGettersAndSetters(){
+        City city1 = new City();
+        city1.setCityid(50);
+        Assertions.assertEquals(50,city1.getCityid(), "City id error");
+        city1.setCountryid(9);
+        Assertions.assertEquals(9,city1.getCountryid(), "Country id error");
+        city1.setCity("Cool city");
+        Assertions.assertEquals("Cool city",city1.getCity(), "City name error");
+
+    }
 
 }
