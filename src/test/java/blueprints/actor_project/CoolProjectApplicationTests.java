@@ -50,4 +50,26 @@ class CoolProjectApplicationTests {
 
     }
 
+    @Test
+    public void testFilmGettersAndSetters(){
+        Film film1 = new Film();
+        film1.setFilmid(10);
+        Assertions.assertEquals(10,film1.getFilmid(), "Film id error");
+        film1.setDesc("This is a film test");
+        Assertions.assertEquals("This is a film test",film1.getDesc(), "Film Description error");
+        film1.setRate(2.5);
+        Assertions.assertEquals(2.5,film1.getRate(), "Film rate error");
+        film1.setRating("Poor");
+        Assertions.assertEquals("Poor",film1.getRating(), "Film rating error");
+        film1.setLength(125);
+        Assertions.assertEquals(125,film1.getLength(), "Film Length error");
+        film1.setTitle("Film Title Test");
+        Assertions.assertEquals("Film Title Test",film1.getTitle(), "Film Title error");
+        film1.setYear(2005);
+        Assertions.assertEquals(2005,film1.getYear(), "Film Year error");
+        film1.setLang_id(2);
+        Assertions.assertEquals(2,film1.getLang_id(), "Film Language id error");
+
+    }
+
 }

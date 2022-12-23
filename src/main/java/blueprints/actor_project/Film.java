@@ -29,6 +29,10 @@ public class Film {
         return actors;
     }
 
+    public void setActors(List<Actor> actors) {
+        this.actors = actors;
+    }
+
     @Column(name="release_year")
     int year;
 
