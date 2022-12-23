@@ -71,5 +71,18 @@ class CoolProjectApplicationTests {
         Assertions.assertEquals(2,film1.getLang_id(), "Film Language id error");
 
     }
+    @Test
+    public void testFilmActorGettersAndSetters(){
+        Actor actor2 = new Actor();
+        actor2.setActorid(4);
+        Film film2 = new Film();
+        film2.setFilmid(6);
+        FilmActor fa1 = new FilmActor();
+        fa1.setFilmID(film2);
+        Assertions.assertNotNull(fa1.getFilmID(), "FA film-id error");
+        fa1.setActorID(actor2);
+        Assertions.assertNotNull(fa1.getActorID(), "FA actor-id error");
+
+    }
 
 }
