@@ -1,4 +1,4 @@
-package blueprints.actor_project;
+/*package blueprints.actor_project;
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.secretsmanager.AWSSecretsManager;
@@ -67,3 +67,4 @@ public class ApplicationConfig {
     }
 
 }
+*/

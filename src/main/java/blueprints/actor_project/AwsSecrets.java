@@ -1,4 +1,4 @@
-package blueprints.actor_project;
+/*package blueprints.actor_project;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,3 +16,4 @@ public class AwsSecrets {
     private String port;
     private String dbInstanceIdentifier;
 }
+*/
